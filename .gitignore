@@ -1,7 +1,7 @@
 *.class
 *.jar
 *Config.java
-.DS_Store
+*.DS_Store
 .metadata
 bin/
 tmp/
