@@ -16,3 +16,4 @@ local.properties
 .classpath
 ..gitignore.un~
 *conf.properties
+~*
