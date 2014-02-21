@@ -181,7 +181,7 @@ public class HashTagStream {
 		final HashTagStream server = new HashTagStream();
 		server.startScanning(tag);
 		server.startStreamToDatabase();
-		if(true || args.length > 1 && args[1].equals("gui")){
+		if(args.length > 1 && args[1].equals("gui")){
 			SwingUtilities.invokeLater(new Thread(){
 				public void run(){
 					server.createAndShowGUI(tag);
