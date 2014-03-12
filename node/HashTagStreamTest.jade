@@ -1,0 +1,22 @@
+doctype html
+html(lang="en")
+  head
+    title=tag
+  body
+    script(src="http://code.jquery.com/jquery-1.11.0.min.js")
+    script(src="/socket.io/socket.io.js")
+    script(type="text/javascript").
+      $( document ).ready(function() {
+        var socket = io.connect();
+        socket.emit('create','#{tag}');
+        socket.on('tweet', function (data) {
+          $('#tweets').prepend('<b>' + data.user.screen_name + ":</b> " + data.text + '<br>');
+        });
+        socket.on('tags', function (data) {
+          $('#tags').text(data.tags.toString());
+        });
+      });
+    h1.
+      #{tag}
+    p(id="tags")
+    div(id="tweets")
