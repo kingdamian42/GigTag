@@ -7,7 +7,7 @@ app.http().io();
 app.listen(8888);
 var conf = require('./conf.json');
 
-var arrayOfTags = ['Selfie','TitanFall'];
+var arrayOfTags = [];
 var myTwitStream;
 
 var t = new twitter({
