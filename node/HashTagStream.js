@@ -64,8 +64,8 @@ function trackTags(array){
     stream.on('data', function(data) {
       var tweet = data.text;
       array.forEach(function(tag){
-        if(tweet.indexOf(tag) != -1)
-          app.io.sockets.in(tag).emit('tweet',data);
+        if(tweet.toLowerCase().indexOf(tag.toLowerCase()) != -1)
+          app.io.sockets.in(tag.toLowerCase()).emit('tweet',data);
       });
     });
     myTwitStream = stream;

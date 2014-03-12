@@ -8,7 +8,7 @@ html(lang="en")
     script(type="text/javascript").
       $( document ).ready(function() {
         var socket = io.connect();
-        socket.emit('create','#{tag}');
+        socket.emit('create','#{tag}'.toLowerCase());
         socket.on('tweet', function (data) {
           $('#tweets').prepend('<b>' + data.user.screen_name + ":</b> " + data.text + '<br>');
         });
