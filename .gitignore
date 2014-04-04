@@ -18,4 +18,4 @@ local.properties
 *conf.properties
 *conf.json
 ~*
-node/tweets/*
+node/tweets/*.txt
