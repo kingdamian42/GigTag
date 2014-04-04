@@ -1,5 +1,7 @@
 var twitter = require('ntwitter');
-var app  = require('express.io')();
+var express = require('express.io');
+var fs = require('fs');
+var app = express();
 var jade = require('jade');
 app.set('views',__dirname);
 app.set('view engine','jade');
@@ -7,7 +9,7 @@ app.http().io();
 app.listen(8888);
 var conf = require('./conf.json');
 
-var arrayOfTags = [];
+var arrayOfTags = ['gigtag','selfie'];
 var myTwitStream;
 
 var t = new twitter({
@@ -17,8 +19,18 @@ var t = new twitter({
   access_token_secret: conf.access_token_secret
 });
 
+app.use('/public', express.static(__dirname + '/public'));
+
 app.get('/gig/:tag', function(req,res){
   res.render('HashTagStreamTest.jade',{tag:req.params.tag});
+});
+
+app.get('/gig/:tag/text', function(req,res){
+  res.sendfile(__dirname + '/tweets/'+req.params.tag+".txt")
+});
+
+app.get('/mod/:tag', function(req,res){
+  res.render('moderation.jade',{tag:req.params.tag});
 });
 
 app.io.route('create',function(req){
@@ -32,6 +44,22 @@ app.io.route('add',function(req){
 app.io.route('remove',function(req){
   removeTag(req);
 });
+
+app.io.route('moderate',function(req){
+  app.io.sockets.in(req.data.tag.toLowerCase()).emit('moderatedTweet',req.data);
+  writeToFile(req.data);
+});
+
+function writeToFile(data){
+  //data contains .user, .text, and .tag
+  var filename = __dirname + '/tweets/'+data.tag+".txt";
+  var strToWrite = '@'+data.user+":"+data.text+"\n";
+  fs.appendFile(filename,strToWrite,function(err){
+    if(err){
+      console.log("err" + err);
+    }
+  });
+}
 
 function sendTags(){
   app.io.emit('tags',{'tags': arrayOfTags});
