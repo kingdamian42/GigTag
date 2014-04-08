@@ -1,0 +1,76 @@
+#N canvas 166 142 784 615 10;
+#X obj 11 212 r KK;
+#X obj 40 262 gemhead;
+#X floatatom 73 356 5 0 0 0 - - -;
+#X obj 28 19 gemwin;
+#X msg 28 -26 create \, 1;
+#X msg 36 -4 0 \, destroy;
+#X obj 11 242 prepend text;
+#X obj 136 220 qlist;
+#X msg 250 141 next;
+#X obj 250 120 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X msg 270 71 0;
+#X msg 241 71 1;
+#X obj 307 77 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
+#X msg 115 21 clear;
+#X msg 197 97 rewind;
+#X floatatom 136 247 5 0 0 0 - - -;
+#X floatatom 257 164 5 0 0 0 - - -;
+#X msg 257 186 tempo 1;
+#X obj 142 -25 t b b b;
+#X obj 142 -46 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X msg 188 67 bang;
+#X obj 181 44 delay 1000;
+#X obj 161 -2 delay 500;
+#X obj 250 97 metro 2000;
+#X text 324 317 Okay \, so whats going on here is that the qlist is
+going through the file "qlist.txt" and reading everything that starts
+with KK \, and displays it for 3000 miliseconds.The KK is arbitrary
+\, I just picked lettlers. If another line started with JJ \, you could
+display it somewhere else. SOmething like Left and Right or some location
+tag would do us well for that. All the metro nonsense in that big chunk
+is just doing the cycling through. The real trick that was holding
+me back was that little shitty "r" at the bottom \, and the prepend
+text command. What does prepend even mean? Is that some computer science
+term? Whatever \, it works. So "r" is read and it reads for "KK" and
+then dsiplays everything up to the semicolon. This is basically all
+stolen \, the one I was looking at was seperating strings from the
+file \, so pretty much all I did was trim that out. There it is though.
+;
+#X obj 11 348 text3d;
+#X obj 39 308 color 0 0 1;
+#X obj 40 286 translateXYZ 0 0.7 2;
+#X msg 161 21 read qlist.txt;
+#X connect 0 0 6 0;
+#X connect 1 0 27 0;
+#X connect 2 0 25 1;
+#X connect 4 0 3 0;
+#X connect 5 0 3 0;
+#X connect 6 0 25 0;
+#X connect 7 0 15 0;
+#X connect 7 1 14 0;
+#X connect 7 1 20 0;
+#X connect 8 0 7 0;
+#X connect 9 0 8 0;
+#X connect 10 0 23 0;
+#X connect 11 0 23 0;
+#X connect 11 0 14 0;
+#X connect 12 0 23 1;
+#X connect 13 0 7 0;
+#X connect 14 0 7 0;
+#X connect 16 0 17 0;
+#X connect 17 0 7 0;
+#X connect 18 0 13 0;
+#X connect 18 1 22 0;
+#X connect 18 2 21 0;
+#X connect 19 0 18 0;
+#X connect 20 0 7 0;
+#X connect 21 0 7 0;
+#X connect 22 0 28 0;
+#X connect 23 0 9 0;
+#X connect 26 0 25 0;
+#X connect 27 0 26 0;
+#X connect 28 0 7 0;
