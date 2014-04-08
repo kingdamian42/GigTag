@@ -1,6 +1,6 @@
 html(lang="en")
   head
-  title='GigTag Moderation'
+  title='#'+tag+' Moderation'
   link(href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet")
   //link(rel="stylesheet" type="text/css" href="mod_style.css")
   link(href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css", rel="stylesheet")
@@ -11,15 +11,17 @@ html(lang="en")
       var socket = io.connect();
       socket.emit('create','#{tag}'.toLowerCase());
       socket.on('tweet', function (data) {
-        $('#tweets').prepend('<p id="tweet"><i class="fa fa-check" data-tuser="'+data.user.screen_name+'" data-ttext="'+data.text+'"></i><i class="fa fa-times"></i> <b>@' + data.user.screen_name + ":</b> " + '('+ data.id + ')' +data.text + '</p>');
+        $('#tweets').prepend('<p id="tweet"><button class="pure-button approve" data-tuser="'+data.user.screen_name+'" data-ttext="'+data.text+'"><i class="fa fa-check"></i></button><button class = "pure-button deny"><i class="fa fa-times"></i></button> <b>@' + data.user.screen_name + ":</b> " + '('+ data.id + ')' +data.text + '</p>');
       });
-      $(document).on('click','.fa-check',function(){
+      $(document).on('click','.approve',function(){
         var name = $(this).data('tuser');
         var text = $(this).data('ttext');
         socket.emit('moderate',{'user':name,'text':text,'tag':'#{tag}'});
       });
-      $(document).on('click','.fa-times',function(){
+      $(document).on('click','.deny',function(){
         $(this).parent().remove();
       });
     });
+  h1.
+    ##{tag} Moderation
   div(id="tweets")

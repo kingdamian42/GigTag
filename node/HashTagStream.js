@@ -21,8 +21,18 @@ var t = new twitter({
 
 app.use('/public', express.static(__dirname + '/public'));
 
+//app.use('/text', express.static(__dirname + '/tweets'));
+
+app.get('/gig/:tag/shapes', function(req,res){
+  res.render('Shapes.jade',{tag:req.params.tag});
+});
+
 app.get('/gig/:tag', function(req,res){
-  res.render('HashTagStreamTest.jade',{tag:req.params.tag});
+  res.render('Tweets.jade',{tag:req.params.tag});
+});
+
+app.get('/gig/:tag/colors', function(req,res){
+  res.render('Colors.jade',{tag:req.params.tag});
 });
 
 app.get('/gig/:tag/text', function(req,res){
@@ -48,6 +58,11 @@ app.io.route('remove',function(req){
 app.io.route('moderate',function(req){
   app.io.sockets.in(req.data.tag.toLowerCase()).emit('moderatedTweet',req.data);
   writeToFile(req.data);
+});
+
+app.use(function(err,req,res,next){
+  console.log(err);
+  res.send(err.status,err.status + " There has been some sort of error")
 });
 
 function writeToFile(data){

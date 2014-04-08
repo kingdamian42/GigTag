@@ -1,1 +1,8 @@
 body, html { overflow: hidden; }
+.center{
+  text-align: center;
+}
+#tweet{
+  vertical-align:middle;
+  font-size: 42px;
+}
