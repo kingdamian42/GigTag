@@ -10,7 +10,7 @@ import java.util.Timer;
 
 public class TweetPuller{
   public static void main(String[] args){
-    if(args.length < 2){
+    if(args.length < 3){
       System.err.println("Too few arguments");
       return;
     }
