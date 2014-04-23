@@ -27,6 +27,10 @@ app.get('/gig/:tag/shapes', function(req,res){
   res.render('Shapes.jade',{tag:req.params.tag});
 });
 
+app.get('/gig/:tag/gifz', function(req,res){
+  res.render('gifz.jade',{tag:req.params.tag});
+});
+
 app.get('/gig/:tag', function(req,res){
   res.render('Tweets.jade',{tag:req.params.tag});
 });
@@ -68,7 +72,7 @@ app.use(function(err,req,res,next){
 function writeToFile(data){
   //data contains .user, .text, and .tag
   var filename = __dirname + '/tweets/'+data.tag+".txt";
-  var strToWrite = '@'+data.user+":"+data.text+"\n";
+  var strToWrite = '3000 KK @'+data.user+":"+data.text+";\n";
   fs.appendFile(filename,strToWrite,function(err){
     if(err){
       console.log("err" + err);

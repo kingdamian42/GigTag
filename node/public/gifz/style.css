@@ -1,0 +1,33 @@
+    html, body {
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    #text   {
+    color:white;
+    position: absolute;
+    z-index: 100;
+    font-size:44px;
+    font-weight:bold;
+    left:30px;
+    top:680px;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #ff00de, 0 0 70px #ff00de, 0 0 80px #ff00de, 0 0 100px #ff00de, 0 0 150px #ff00de;
+}
+
+ img {
+  /* Set rules to fill background */
+  min-height: 825px;
+  min-width: 825px;
+
+  /* Set up proportionate scaling */
+  width: 100%;
+  height: 100%;
+	
+  /* Set up positioning */
+  position: fixed;
+  top: 0;
+  left: 0;
+
+}
+
